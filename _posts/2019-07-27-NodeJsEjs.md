@@ -1,10 +1,6 @@
 ---
-category: Stuff
-path: '/stuff'
-title: 'nodejs中ejs的运用'
-type: 'GET'
-
-layout: nil
+title: nodejs中ejs的运用
+date: 2019-07-27 22:46:49
 ---
 
 # nodejs中ejs的运用

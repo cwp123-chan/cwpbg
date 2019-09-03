@@ -1,10 +1,6 @@
 ---
-category: Stuff
-path: '/stuff'
-title: '流程图与思维导图D2'
-type: 'GET'
-
-layout: nil
+title: 流程控制与思维导图
+date: 2019-07-18 22:46:49
 ---
 
 # 流程控制与思维导图

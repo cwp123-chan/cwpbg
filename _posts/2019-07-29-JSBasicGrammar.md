@@ -1,10 +1,6 @@
 ---
-category: Stuff
-path: '/stuff'
-title: 'Node.js的特点'
-type: 'GET'
-
-layout: nil
+title: JS基本语法
+date: 2019-07-29 22:46:49
 ---
 
 # JS基本语法

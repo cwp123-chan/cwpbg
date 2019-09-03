@@ -1,139 +1,432 @@
-LOFFER是个可以帮助你get off from LOFTER的软件（我知道这个pun很烂）。
+# Type on Strap 
+
+[![Build Status](https://travis-ci.org/sylhare/Type-on-Strap.svg?branch=master)](https://travis-ci.org/sylhare/Type-on-Strap)
+[![Gem Version](https://badge.fury.io/rb/type-on-strap.svg)](https://badge.fury.io/rb/type-on-strap)
+
+A free and open-source [Jekyll](https://jekyllrb.com) theme. Based on Rohan Chandra [type-theme](https://github.com/rohanchandra/type-theme) with a few new features:
+
+* Responsive design
+* Portfolio page for your projects
+* Tags compatibility
+* Bootstrap : [Get Bootstrap](http://getbootstrap.com/)
+* Search feature : [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search)
+* Math Rendering : [KateX](https://github.com/Khan/KaTeX)
+* Nice fonts : [Font Awesome](https://fontawesome.com/), [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), [Pacifico](https://fonts.google.com/specimen/Pacifico?selection.family=Pacifico) 
+* Seo Tags : [Jekyll-seo-tag](https://help.github.com/articles/search-engine-optimization-for-github-pages/)
+* Syntax Highlighting: Easily customisable [Base16](https://github.com/chriskempson/base16)
+* Free of rights images from [pexels](https://www.pexels.com/)
+
+> [Demo](https://sylhare.github.io/Type-on-Strap/)
+ 
+[![Default Type on Strap blog](https://github.com/Sylhare/Type-on-Strap/blob/master/screenshot.png?raw=true)](https://sylhare.github.io/Type-on-Strap/)
+
+## Table of Contents
+
+1. [Usage](https://github.com/Sylhare/Type-on-Strap#Usage)
+2. [Structure](https://github.com/Sylhare/Type-on-Strap#structure)
+3. [Configure Type on Strap](https://github.com/Sylhare/Type-on-Strap#configure-type-on-strap)
+4. [Layout](https://github.com/Sylhare/Type-on-Strap#layout)
+5. [Feature pages](https://github.com/Sylhare/Type-on-Strap#feature-pages)
+6. [Template as a Gem](https://github.com/Sylhare/Type-on-Strap#Template-as-a-Gem)
+7. [Advanced](https://github.com/Sylhare/Type-on-Strap#advanced)
+8. [License](https://github.com/Sylhare/Type-on-Strap#license)
+
+## Usage
+
+1. Fork and clone the [Type on Strap repo](https://github.com/sylhare/Type-On-Strap): `git clone https://github.com/Sylhare/Type-on-Strap.git`
+2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](https://github.com/Sylhare/Type-on-Strap/issues/1) if you have a problem.
+3. Install the theme's dependencies: `bundle install`
+4. Customize the theme
+	- Github Page: [update `_config.yml`](https://github.com/Sylhare/Type-on-Strap#site-configuration)
+5. Run the Jekyll server: `jekyll serve`
+
+## Structure
+
+Here are the main files of the template
+
+```bash
+jekyll-theme-basically-basic
+├── _draft	               # To store your drafts, they won't be published on your site
+├── _includes	               # theme includes
+├── _layouts                   # theme layouts (see below for details)
+├── _portfolio	               # collection of article to be populated in the portfolio page
+├── _posts                     # Blog posts
+├── _sass                      # Sass partials 
+├── assets
+|  ├── js	               # theme javascript, Katex, jquery, bootstrap, jekyll search, 
+|  ├── css                     # isolated Bootstrap, font-awesome, katex and main css
+|  ├── fonts		       # Font-Awesome, and other fonts
+|  └── img		       # Images used for the template
+├── pages
+|   ├── 404.md		       # To be displayed when url is wrong
+|   ├── about.md               # About example page
+|   ├── gallery.md             # Gallery page for your photos
+|   ├── portfolio.md	       # Portfolio page for your projects
+|   ├── search.html	       # Search page
+|   └── search.json            # Specify the search target (page, post, collection)
+├── _config.yml                # sample configuration
+└── index.html                 # sample home page (blog page paginated)
+```
+	
+## Configure Type on Strap
+
+Open `_config.yml` in a text editor to change most of the blog's settings.
+
+If a variable in this document is marked as "optional", disable the feature by removing all text from the variable. 
+
 
-这是一个可以通过Fork直接发布在GitHub的Jekyll博客，你不需要编写代码或使用命令行即可获得一个部署在GitHub的博客。
+### Site configuration
+Configure Jekyll as your own blog or with a subpath in in `_config.yml`:
+
+Jekyll website *without* a subpath (such as a GitHub Pages website for a given username):
+
+```yml
+  baseurl: ""
+  url: "https://username.github.io"
+```
 
-当你看到不认识的术语，请忽略它，我知道程序员不说人话，我都不是程序员但是我已经开始意识到这是因为我们不知道这些概念用人话怎么说。
+Jekyll website *with* subpath (like the Type on Strap [demo](https://sylhare.github.io/Type-on-Strap/) page):
 
-以下我会尽量用人话解说如何使用这个……LOFFER。
+```yml
+  baseurl: "/sub-directory"
+  url: "https://username.github.io/"
+```
 
-## 注意
+Please configure this  before using the theme.
 
-LOFFER是一个**博客模板**，使用GitHub Pages发布个人博客是没有任何问题的。 **但是:**
+### Meta and Branding
 
-- **请勿发布成人向内容** 
-- **不要将大量图片上传到GitHub**
+Meta variables hold basic information about your Jekyll site which will be used throughout the site 
+and as meta properties for search engines, browsers, and the site's RSS feed.
 
-如有疑问，请阅读[GitHub Pages官方说明](https://pages.github.com/)。
+Change these variables in `_config.yml`:
 
-另外，同人作品更好的发布平台是[AO3](https://archiveofourown.org/)，你想你发在AO3还有tag还有kudos还有人看，是吧？
+```yml
+  theme_settings:
+    title: My Jekyll Blog                 # Name of website
+    avatar: assets/img/triangle.png       # Path of avatar image, to be displayed in the theme's header
+    description: My blog posts            # Short description, primarily used by search engines
+```
 
+### Customizing text
 
-## 如何使用
+#### Footer and Header's text
 
-首先，这个博客主题适应手机阅读，但是，要使用它建立你自己的博客，你需要上电脑操作。
+Customize your site header/footer with these variables in `_config.yml`:
 
-### 第一步 Fork到你的GitHub
+```yml
+  theme_settings:
+    header_text: Welcome to my Jekyll blog
+    header_feature_image: assets/img/sample3.png
+    footer_text: Copyright 2017
+```
 
-请点击[GitHub](https://github.com/)，注册一个GitHub账户。我们可以理解Git就是个文件版本管理系统，本身并不需要会代码即可使用。
+#### Localisation string
 
-现在你看到的LOFFER，是作为一个GitHub上的Repository（代码库）存在的，你可以把这个代码库复制到你自己的GitHub账户中，这个操作叫做Fork。
+Change localization string variables in `_config.yml`.
 
-点击[LOFFER](https://github.com/FromEndWorld/LOFFER)，进入LOFFER的GitHub Repository页面，然后点Fork：
+English text used in the theme has been grouped  so you can quickly translate the theme or change labels to suit your needs.
 
-![gif](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/fork.gif)
+```yml
+  theme_settings:
+     str_follow_on: "Follow on"
+     str_rss_follow: "Follow RSS feed"
+     str_email: "Email"
+     str_next_post: "Next post"
+     str_previous_post: "Previous post"
+     str_next_page: "Next"
+     str_previous_page: "Prev"
+     str_continue_reading: "Continue reading"
+     str_javascript_required_disqus: "Please enable JavaScript to view comments."
+```
 
-然后你立刻就可以看到LOFFER再次出现，这次它已经属于你了，这里我建议你重命名它，点击settings，给你的博客起个名字（请尽量使用字母而非中文）。
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/rename.png)
+### Other features
 
-然后，向下拉页面，你会看到“GitHub Pages”，这是GitHub内置的网站host服务，选择master，如图所示：
+Jekyll works with [liquid](https://shopify.github.io/liquid/) tags usually represented by:
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/pages.png)
+```
+{{ liquid.tag | filter }}
+```
 
-在几秒钟后，刷新此页面，你通常会看到这个绿色的东西（如果没看到，多等一会），你的网站已经发布成功，点击这个链接，即可查看：
+These are useful to render your jekyll files. 
+You can learn more about them on [shopify's doc](https://help.shopify.com/themes/liquid/basics)
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/published.png)
+### Footer's icons
 
-你可能会看到网站长得很丑，请继续下一步.
+Display the site's icon from [Font Awesome](https://fortawesome.github.io/Font-Awesome/) in the footer. 
+All icon variables should be your username enclosed in quotes (e.g. "username") in `_config.yml`, 
+except for the following variables:
 
-### 第二步 设置站点信息
+```yml
+  theme_settings:
+     rss: true                                                   # Make sure you created a feed.xml with feed.xml layout
+     email_address: type@example.com
+     linkedin: https://www.linkedin.com/in/FirstLast
+     stack_exchange: https://stackoverflow.com/users/0000/first-last
+```
 
-在你的博客的GitHub代码库页面里，选择Code，文件列表里选择_config.yml，点击打开，点击右上角笔形图标修改文档。
+### Comments (via Disqus)
 
-修改完成后，点击“Commit changes”。每次修改过代码库并且commit后，GitHub Pages都会自动重新发布网站，只要等上几分钟，再次刷新你的博客页面，就会看到你的修改了。
+Optionally, if you have a [Disqus](https://disqus.com/) account, you can show a 
+comments section below each post.
 
-还有一点，**LOFFER使用的是MIT协议，大意就是全部开源随意使用，如果你要保留自己博文的权利，请编辑LICENSE文件，写上类似“_posts中的文档作者保留权利”这样的内容。**
+To enable Disqus comments, add your [Disqus shortname](https://help.disqus.com/customer/portal/articles/466208) 
+to your project's `_config.yml` file:
 
-### 第三步 发布博文
+```yml
+  theme_settings:
+     disqus_shortname: my_disqus_shortname
+```
 
-在你的博客的GitHub代码库页面里，点开_posts文件夹，这里面就是你的博客文章。
+### Google Analytics
 
-这些文章使用的格式是Markdown，文件后缀名是md，这是一种非常简单易用的有格式文本标记语言，你应该已经注意到，在LOFFER自带的示例性博文中有一篇中文的Markdown语法介绍。
+To enable Google Analytics, add your [tracking ID](https://support.google.com/analytics/answer/1032385) 
+to `_config.yml` like so:
 
-更简单的办法是使用[Typora](https://typora.io/)，这是一个全图形化界面，全实时预览的Markdown写作软件，非常轻量，而且免费。
+```yml
+  theme_settings:
+     google_analytics: UA-NNNNNNNN-N
+```
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/Typora.png)
+### Math typesetting
 
-在发布博文前，你需要在文章的头部添加这样的内容，包括你的文章标题，发布日期，作者名，和tag等。
+When KateX is set in `_config.yml`:
 
-    ---
-    layout: post
-    title: LOFFER文档
-    date: 2019-06-02
-    Author: 来自中世界
-    categories: 
-    tags: [sample, document]
-    comments: true
-    --- 
+```yml
+  theme_settings:
+     katex: true # to Enable it
+```
 
-完成后，保存为.md文件，文件名是date-标题，例如 2019-06-02-document.md (注意这里的标题会成为这个post的URL，所以推荐使用字母而非中文，它不影响页面上显示的标题)，然后上传到_posts文件夹，commit，很快就可以在博客上看到新文章了。
+You can then wrap math expressions with `$$` signs in your posts and make sure you have set the `katex` variable 
+in `_config.yml` to `true` for math typesetting.
 
-### 可选：图片怎么办？
+For inline math typesetting, type your math expression on the *same line* as your content. For example:
 
-少量图片可以上传到images文件夹，然后在博文中添加。
+```latex
+Type math within a sentence $$2x^2 + x + c$$ to display inline
+```
 
-但是GitHub用来当做图床有滥用之嫌，如果你的博客以图片为主，建议选择外链图床，例如[sm.ms](https://sm.ms/)就是和很好的选择。
+For display math typesetting, type your math expression on a *new line*. For example:
 
-如果想要寻找更适合自己的图床，敬请Google一下。
+```latex
+$$
+  \bar{y} = {1 \over n} \sum_{i = 1}^{n}y_i
+$$
+```
 
-在博文中添加图片的Markdown语法是：`![图片名](URL)`
+### Post excerpt
 
-### 可选：添加评论区
+The [excerpt](https://jekyllrb.com/docs/posts/#post-excerpts) are the first lines of an article that is display on the blog page. 
+The length of the excerpt has a default of around `250` characters and can be manually set in the post using:
 
-LOFFER支持Disqus评论，虽然Disqus很丑，但是它是免费的，设置起来又方便，因此大家也就不要嫌弃它。
+```yml
+---
+layout: post
+title: Sample Page
+excerpt_separator: <!--more-->
+---
 
-首先，注册一个[Disqus](https://disqus.com/)账户，我们可以选择这个免费方案：
+some text in the excerpt
+<!--more-->
+... rest of the text not shown in the excerpt ...
+```
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/Disqus-plan.png)
+The html is stripped out of the excerpt so it only display text.
 
-注册成功后，新建一个站点（site），以LOFFER为例设置步骤如下：
+## Layout
+Please refer to the [Jekyll docs for writing posts](https://jekyllrb.com/docs/posts/). 
+Non-standard features are documented below.
 
-首先站点名LOFFER，生成了shortname是loffer，类型可以随便选。
+### Layout: Post
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/Disqus-1.png)
+This are the basic features you can use with the  `post` layout.
 
-安装时选择Jekyll。
+```yml
+---
+layout: post
+title: Hello World                                # Title of the page
+hide_title: true                                  # Hide the title when displaying the post, but shown in lists of posts
+feature-img: "assets/img/sample.png"              # Add a feature-image to the post
+thumbnail: "assets/img/thumbnail/sample-th.png"   # Add a thumbnail image on blog view
+color: rgb(80,140,22)                             # Add the specified color as feature image, and change link colors in post
+bootstrap: true                                   # Add bootstrap to the page
+tags: [sample, markdown, html]
+---
+```
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/Disqus-2.png)
+With `thumbnail`, you can add a smaller image than the `feature-img`. 
+If you don't want/have a thumbnail you can still use the same image as the feature one.
 
-最后填入你的博客地址，语言可以选中文，点Complete，即可！
+The background used when `color` is set comes from `lineart.png` from [xukimseven](https://github.com/xukimseven) 
+you can edit it in the config file (`theme_settings > color_image`). If you want another one, put it in `/assets/img` as well. 
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/Disqus-3.png)
+The **bootstrap** is not mandatory and is only useful if you want to add bootstrapped content in your page. 
+It will respect the page and theme layout, mind the padding on the sides.
 
-然后需要回到你的博客，修改_config.yml文件，在disqus字段填上你的shortname，commit，完成！
+### Layout: Page
 
-### 导入LOFTER的内容
+The page layout have a bit more features explained here.
 
-这部分由于LOFTER的导出文件十分~~优秀~~，需要另外解决。
+```yml
+---
+layout: page
+title: "About" 
+subtitle: "This is a subtitle"   
+feature-img: "assets/img/sample.png" 
+permalink: /about.html               # Set a permalink your your page
+hide: true                           # Prevent the page title to appear in the navbar
+icon: "fa-search"                    # Will Display only the fontawesome icon (here: fa-search) and not the title
+tags: [sample, markdown, html]
+---
+```
 
-诸位可以使用[墨问非名太太的脚本](http://underdream.lofter.com/post/38ea7d_1c5d8a983)，其中选择Jekyll输出即可。
+The hide only hides your page from the navigation bar, it is however still generated and can be access through its link. 
+Use the `_draft` folder to keep files from being generated on your site.
 
-我个人也在折腾一个脚本，目前还没有完全debug清楚，不管如何，请先在lofter里导出一下，存在本地也是好的，贴吧可以让2017以前所有内容全部消失，中国互联网，没什么不可能发生的。
+### Layout: Default
 
-## 致谢
+This layout includes the head, navigation bar and footer around your content.
 
-* [Jekyll](https://github.com/jekyll/jekyll) - 这是本站存在的根基
-* [Kiko-now](<https://github.com/aweekj/kiko-now>) - 我首先是fork这个主题，然后再其上进行修改汉化，才有了LOFFER
-* [Font Awesome](<https://fontawesome.com/>) - 社交网络图标来自FontAwesome的免费开源内容
+## Feature pages
 
+All feature pages besides the "home" one are stored in the `page` folder, 
+they will appear in the navigation bar unless you set `Hide: true` in the front matter. 
 
+Here are the documentation for the other feature pages that can be added through `_config.yml`.
 
-## 帮助这个项目
+### Home
 
-介绍更多人来使用它，摆脱lofter自由飞翔！
+This page is the used as the home page of the template (in the `index.html`). It displays the list of article in `_posts`.
+You can use this layout in another page (adding a title to it will make it appear in the navigation bar).
 
-当然如果单说写同人的话，我还是建议大家都去AO3，但是自家博客自己架也很酷炫，你还可以选择很多其他的forkable Jeykll主题，GitHub上有很多，或者试试其他博客架设工具，例如Hexo，与代码斗其乐无穷。
+The recommended width and height for the home picture is width:`2484px;` and height:`1280px` 
+which are the dimension of the actual picture for it to be rolling down as you scroll the page. 
 
-最后，回到[LOFFER](https://github.com/FromEndWorld/LOFFER)，给我点一个☆吧！
+### Portfolio
 
-![img](https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/givemefive.png)
+Portfolio is a feature page that will take all the markdown/html files in the `_portfolio` folder to create a 3-columns image portfolio matrix.
+
+To use the portfolio, simply create a `portfolio.md` with this information inside:
+```yml
+--- 
+layout: page
+title : Portfolio 
+---
+
+{% include portfolio.html %}
+```
+
+#### Portofolio posts
+
+You can format the portfolio posts in the `_portfolio` folder using the `post layout`. Here are little explaination on some of the possible feature you can use and what they will do.
+
+If you decide to use a date, please be sure to use one that can be parsed such as `yyyy-mm-dd`. You can see more format example on the demo posts that are available for the theme:
+
+```yml
+---
+layout: post
+title: Circus				       # Title of the portfolio post
+feature-img: "assets/img/portfolio/cake.png"   # Will display the image in the post
+img: "assets/img/portfolio/cake.png"           # Will display the image in the portfolio page
+date: 2019-07-25		 	       # Not mandatory, however needs to be in date format to display the date
+---
+```
+
+### Gallery
+
+You can create a gallery using [Masonry JS](https://masonry.desandro.com/) which will placing the pictures in optimal position 
+based on available vertical space. 
+You need to specify the `gallery_path` which will be used to find the pictures to render. 
+It will take all of the picture under that directory. Then use the `include` to add it in your page. 
+
+```yml
+---
+layout: page
+title: Gallery
+gallery: "assets/img/pexels"
+---
+
+{% include gallery.html gallery_path=page.gallery %}
+```
+
+
+### Search
+
+The search feature is based on [Simple-Jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) 
+there is a `search.json` file that will create a list of all of the site posts, pages and portfolios. 
+
+Then there's a `search.js` displaying the formatted results entered in the `search.html` page.
+
+The search page can be hidden with the `hide` option. You can remove the icon by removing `icon`:
+
+```yml
+---
+layout: search
+title: Search
+icon: "search"
+---
+```
+
+### Tags
+
+Tags should be placed between `[]` in your post metadata. Separate each tag with a comma. 
+Tags are recommended for posts and portfolio items.
+
+For example:
+
+```yml
+---
+layout: post
+title: Markdown and HTML
+tags: [sample, markdown, html]
+---
+```
+
+> Tags are case sensitive `Tag_nAme` ≠ `tag_name`
+
+All the tags will be listed in `tags.html` with a link toward the pages or posts.
+The Tag page can be hidden with the `hide` option. You can remove the icon by removing `icon` (like for the search page).
+
+## Template as a Gem
+
+You can use Type-on-strap as a [gem](https://rubygems.org/gems/type-on-strap). 
+Checkout an example in the [gem-demo branch](https://github.com/Sylhare/Type-on-Strap/tree/gem-demo).
+To make the feature pages available in from the gem I created them as layouts that can be invoked in the pages folder.
+
+So if you're using the template as a theme, Make sure you have:
+  - A `index.html` file
+  - The right `_config.yml` with the theme setting such as `theme: type-on-strap` uncommented
+  - The feature page included. (ex: as it is already in `pages`)
+  - Some content ready in `_posts` and `_portfolio` to be displayed
+
+Now you can use any theme gem with github pages : [29/11/2017 Github Pages Broadcast](https://github.com/blog/2464-use-any-theme-with-github-pages)
+
+## Advanced
+
+### Minimizing and optimizing: css, js and images
+
+Before you need to have `node` and `npm` installed:
+- Windows: https://nodejs.org/
+- Ubuntu/Debian: `apt-get install nodejs npm libgl1 libxi6`
+- Fedora (dnf) / RHEL/CentOS (yum): `dnf install node npm libglvnd-glx libXi`
+
+Then you need to install [`gulp-cli`](https://gulpjs.com/) and its dependencies:
+```shell
+cd assets/
+sudo npm install gulp-cli -g
+npm install
+```
+
+**Now, whenever you want to minify and optimize, run:**
+```shell
+cd assets/
+gulp default
+# tip: run a git status to see the changes
+git status
+```
+
+## License
+
+There are some fonts and component on this theme going under the MIT licence as well in this theme.
+[The MIT License (MIT)](https://raw.githubusercontent.com/Sylhare/Type-on-Strap/master/LICENSE)

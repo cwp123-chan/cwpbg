@@ -122,6 +122,4 @@ exclude: [".jekyll-cache", "Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "
 # theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
 remote_theme: sylhare/Type-on-Strap # If using as a remote_theme in github
 
-$$
-  \bar{y} = {1 \over n} \sum_{i = 1}^{n}y_i
-$$
+

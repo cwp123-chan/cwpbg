@@ -1,0 +1,205 @@
+# net 实现聊天功能
+
+## server端
+
+```js
+const net = require('net');
+const server = net.createServer();
+const clients = {};//保存客户端的连接
+var client = null;//当前客户连接
+var uid = 0;
+server.on('connection',(socket)=>{
+ //启动心跳机制
+ var isOnline = !0;
+ var keepAliveTimer = socket.timer = setInterval(()=>{
+  if(!isOnline){
+   isOnline = !1;
+   client = socket;
+   quit(socket.nick);
+   return;
+  }
+  if(socket.writable){
+   socket.write('::');
+  }else{
+   client = socket;
+   quit(socket.nick);
+  }
+ },3000);
+ socket.on('end',()=>{
+  console.log(`client disconnected.\n\r`);
+  socket.destroy();
+ });
+ socket.on('error',(error)=>{
+  console.log(error.message);
+ });
+ socket.on('data',(chunk)=>{
+  client = socket;
+  var msg = JSON.parse(chunk.toString());
+  if(msg.cmd=='keep'){
+   isOnline = !0;
+   return;
+  }
+  dealMsg(msg);
+ });
+});
+server.on('error',(err)=>{
+ console.log(err);
+});
+server.on('listening',()=>{
+ console.log(`listening on ${server.address().address}:${server.address().port}\n\r`);
+});
+server.listen(8060);//启动监听
+/**
+ * 处理用户信息
+ */
+function dealMsg(msg){
+ const cmd = msg.cmd;
+ const funs = {
+  'login':login,
+  'chat':chat,
+  'quit':quit,
+  'exit':quit
+ };
+ if(typeof funs[cmd] !== 'function') return !1;
+ funs[cmd](msg);
+}
+/**
+ * 释放连接资源
+ */
+function freeConn(conn){
+ conn.end();
+ delete clients[conn.uuid];
+ conn.timer&&clearInterval(conn.timer);
+}
+/**
+ * 用户首次进入聊天室
+ */
+function login(msg){
+ var uuid = '';
+ uuid = getRndStr(15)+(++uid);//产生用户ID
+ client.write(`欢迎你，${msg.nick}：这里总共有${Object.keys(clients).length}个小伙伴在聊天.\r\n`)
+ client.nick = msg.nick;
+ client.uuid = uuid;
+ clients[uuid] = client;
+ broadcast(`系统：${msg.nick}进入了聊天室.`);
+ 
+}
+/**
+ * 广播消息
+ */
+function broadcast(msg){
+ Object.keys(clients).forEach((uuid)=>{
+  if((clients[uuid]!=client)& clients[uuid].writable){
+   clients[uuid].write(msg);
+  }
+ });
+}
+/**
+ * 退出聊天室
+ */
+function quit(nick){
+ var message = `小伙伴${nick}退出了聊天室.`;
+ broadcast(message);
+ freeConn(client);
+}
+ 
+function chat(msg){
+ if(msg.msg.toLowerCase()=='quit'||msg.msg.toLowerCase()=='exit'){
+  quit(msg.nick);
+  return ;
+ }
+ var message = `${msg.nick}说：${msg.msg}`;
+ broadcast(message);
+} 
+/**
+ * 随机指定长度(len)的字符串
+ */
+function getRndStr(len=1){
+ var rndStr = '';
+ for (; rndStr.length < len; rndStr += Math.random().toString(36).substr(2));
+ return rndStr.substr(0, len);
+}
+
+```
+
+
+
+
+
+## 客户端
+
+```js
+const net = require('net');
+const cout = process.stdout;
+const cin = process.stdin;
+ 
+var client = null;
+var nick = '';
+ 
+cout.write(`请输入昵称：`);
+//监听命令行输入
+cin.on('data',(chunk)=>{
+ if(chunk.toString()!='\r\n'){
+  if(client === null){
+   nick = (chunk+'').replace(/[\r\n]/ig,"");
+   createClient();
+  }else{
+   msg = (chunk+'').replace(/[\r\n]/ig,"");
+   client.write(JSON.stringify({
+    cmd: 'chat',
+    msg: msg,
+    nick: nick
+   }));
+   //如果输入是exit或quit则断开连接并退出
+   if(msg.toLowerCase() == 'exit' || msg.toLowerCase() == 'quit'){
+    client.end();
+    cin.end();
+    return;
+   }
+   cout.write(`你说：${msg}\n\r`);
+  }
+ }else{
+  cout.write(`请输入昵称：`);
+ }
+});
+ 
+function addListener(client) {
+ client.on('connect', () => {
+  cout.write(`已连接到服务器\n\r`);
+  client.write(JSON.stringify({
+   cmd: 'login',
+   msg: 'hello server',
+   nick: nick
+  }));
+ });
+ client.on('end', (chunk) => {
+  cout.write(`与服务器断开连接.\n\r`);
+ });
+ client.on('data', (chunk) => {
+  //如果是心跳信息则回应keep命令
+  if(chunk.toString()=='::'){
+   client.write(JSON.stringify({
+    cmd: 'keep',
+    msg: '',
+    nick: nick
+   }));
+   return ;
+  }
+  cout.write(`${chunk}\n\r`);
+ });
+ client.on('error', (err) => {
+  cout.write(`an error has occured.\n\r${err}`);
+ });
+}
+/**
+ * 创建socket并连接服务器
+ */
+function createClient(){
+ console.log('\033[2J');//清屏操作
+ cout.write(`输入'EXIT OR QUIT'退出聊天室.\r\n`);
+ client = new net.Socket()
+ client.connect({port:8060/*,host:'1.1.1.69'*/});
+ addListener(client);
+}
+```
+

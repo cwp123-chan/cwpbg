@@ -1,0 +1,41 @@
+# Git的安装与使用
+
+## 1.Git的安装
+
+* ### 进入Ubuntu命令行界面输入：
+
+  ```
+  sudo su - 	
+  apt-get install git
+  ```
+
+## 2.Git的使用
+
+* ### 基本命令操作
+
+  ```
+  git clone https：//github.com/username/username.github.io	#获取远程版本库
+  git branch -all
+  git branch -A 		#获取所有分支
+  git branch <mastername>	#创建分支
+  git checkout <库名> <分支名>：<主分支下分支>		#切换分支名
+  版本回退
+  git reset --hard HEAD^		#表示退回到上一个版本
+  git chackout -- <文件名>	#退回上一个区
+  比较版本
+  git diff <文件名>			#比较缓存区与工作去文件区别
+  远程库
+  git status 				  #查看状态
+  git add .				  #从工作区添加到缓存区
+  git commit -m “注释”		#提交缓存区
+  git push <orgin> <master> #上传到远程库
+  git pull --rebase <orgin> <master> #合并分支
+  git log 				  #查看日志
+  git reflog				  #查看每一次命令记录历史
+  git merge <margename>	  #合并分支到主分支下
+  用户
+  git config --global user.name "myname"	更改个人用户名
+  git config --global user.email"myemail" 更改个人邮箱
+  ```
+
+  

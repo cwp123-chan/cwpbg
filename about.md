@@ -1,13 +1,14 @@
 ---
 layout: page
 title: About
-sidebar_link: true
+permalink: /about/
+slug: about
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it
-  for your own use upon downloading. Carry on!
-</p>
+This is a Jekyll theme. You can find out more information about customizing your theme Jekyll, as well as basic documentation Jekyll use in [jekyllrb.com](http://jekyllrb.com/).
 
-To make pages show up in the sidebar, add `sidebar_link: true` to the front
-matter.
+You can find the source code for this theme: [github.com/nandomoreirame/zetsu]({{ site.github }})
+
+You can find the source code in Jekyll [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+
+Theme developed by: [{{ site.author.name }}]({{ site.author.url }})

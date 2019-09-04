@@ -230,7 +230,7 @@ Vue.component('child', {
 <child message="hello!"></child>
 ```
 
-####  实例:!!
+实例:
 
 ```html
 <!DOCTYPE html>
@@ -289,7 +289,11 @@ Vue.component('child', {
 </html>
 ```
 
-#### Prop 的大小写
+
+
+
+
+## Prop 的大小写
 
 HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名
 

@@ -108,6 +108,20 @@ laravel	第一种
 
 正式中 使用 的key与token 以实际为出发点
 
+#### 注意 这边需要启动redis服务 
+
+```
+redis-server.exe redis.windows.conf
+```
+
+```
+redis-cli.exe -h 127.0.0.1 -p 6379
+set myKey abc
+get myKey
+```
+
+
+
 ```php
 // 传入临时文件夹 返回key
 public $url = "127.0.0.1"  //设置laravel的域名访问路径

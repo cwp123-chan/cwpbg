@@ -53,3 +53,5 @@ extension=php_igbinary.dll
 ```
 
 ## 5.完毕!
+
+6. #### 安装 redis 服务 见官网 这边是 php 扩展redis 如果 没有 安装redis服务是运行不了phpredis的

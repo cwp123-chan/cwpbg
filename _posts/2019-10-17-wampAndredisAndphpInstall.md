@@ -1,5 +1,5 @@
 ---
-title:wamp与redis和php的安装
+title: wamp与redis和php的安装
 date: 2019-10-20 23:40:49
 ---
 # wamp与redis和php的安装

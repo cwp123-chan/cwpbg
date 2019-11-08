@@ -123,6 +123,22 @@ get myKey
 
 
 ```php
+    /**@name 获取随机字符串，大小写字母+数字，转变不区分大小写
+     *@param $len 长度
+     *@param $ignoreCase 忽略大小写
+     * */
+    function get_salt($len=6, $ignoreCase=true)
+    {
+        //return substr(uniqid(rand()), -$len);
+        $discode="123546789wertyupkjhgfdaszxcvbnm".($ignoreCase?'': 'QABCDEFGHJKLMNPRSTUVWXYZ');
+        $code_len = strlen($discode);
+        $code = "";
+        for($j=0; $j<$len; $j++){
+            $code .= $discode[rand(0, $code_len-1)];
+        }
+        return $code;
+    }
+
 // 传入临时文件夹 返回key
 public $url = "127.0.0.1"  //设置laravel的域名访问路径
 public function picUpload(Request $request){
@@ -136,8 +152,9 @@ public function picUpload(Request $request){
                 $path = $fileChar->getRealPath();
                 // 假设一个token值
                 $token = md5(date('Y-m-d'));
-                //定义文件名
-                $filename = date('Y-m-d-h-i-s').'.'.$ext;
+                // 定义文件名 使用上面get_salt方法生成随机字符串
+                $get = new tagController;
+                $filename = $get->get_salt(13, true).'.'.$ext;
                 // 定义 新地址的目录路径
                 $dirname = date('Y/m/d/h/');
                 if(is_dir('./tagControllerImgTmp/'.$token.'/'.$dirname)){
